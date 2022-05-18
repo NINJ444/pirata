@@ -10,9 +10,17 @@ class Cannon {
   }
   
   mostrar(){
+  if(keyIsDown(RIGHT_ARROW)){
+    this.angle+=1;
+  }
+  if(keyIsDown(LEFT_ARROW)){
+    this.angle-=1;
+  }
   push();
-    imageMode (CENTER);
-    image (this.topo,this.x,this.y,this.width,this.height);//topo do canhão 
+  translate (this.x,this.y);
+  rotate (this.angle);  
+  imageMode (CENTER);
+    image (this.topo,0,0,this.width,this.height);//topo do canhão 
   pop ();
   image(this.base,70,20,200,200);
   }

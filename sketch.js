@@ -27,7 +27,7 @@ function setup() {
   World.add(world, tower);
   
   angleMode(DEGREES);
-  angle=90;
+  angle=10;
   
   cannon=new Cannon(180,110,130,100,angle);
 
