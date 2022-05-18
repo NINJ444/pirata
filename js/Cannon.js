@@ -8,6 +8,7 @@ class Cannon {
     this.base=loadImage("assets/cannonBase.png");
     this.topo=loadImage("assets/canon.png");
   }
+  
   mostrar(){
   push();
     imageMode (CENTER);
