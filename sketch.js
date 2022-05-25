@@ -33,6 +33,16 @@ function setup() {
 
   ball = new CannonBall(cannon.x,cannon.y);
 
+  //matrizes
+  var m1 = [1,2,3,4,5];
+  //i       0 1 2 3 4
+  //console.log(m1[2]);
+
+  var m2 = [[0,1], [2,3], [4,5]];
+  //i         0      1      2
+  //i        0,1    0,1    0,1 
+  
+  console.log(m2[0][0]);
 
 }
 
@@ -52,4 +62,10 @@ function draw() {
   ball.display();
   cannon.mostrar();
  
+}
+
+function keyReleased(){
+  if(keyCode == DOWN_ARROW){
+    ball.shoot();
+  }
 }
