@@ -3,7 +3,7 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 var engine, world, backgroundImg;
-var canvas, angle, tower, ground, cannon, ball;
+var canvas, angle, tower, ground, cannon, ball, boat;
 var balls=[];
 
 function preload() {
@@ -32,7 +32,8 @@ function setup() {
   
   cannon=new Cannon(180,110,130,100,angle);
 
-  
+  boat = new Boat(width-80, height-60,170,170,-80);
+
   //matrizes
   var m1 = [1,2,3,4,5];
   //i       0 1 2 3 4
@@ -50,9 +51,7 @@ function draw() {
   image(backgroundImg,0,0,1200,600)
   Engine.update(engine);
 
-  
   rect(ground.position.x, ground.position.y, width * 2, 1);
-  
 
   push();
   imageMode(CENTER);
@@ -63,6 +62,13 @@ function draw() {
     showCannonballs(balls[i],i);
   }
   cannon.mostrar();
+
+  Matter.Body.setVelocity(boat.body,{
+    x: -1,
+    y:0,
+  });
+
+  boat.mostrar();
  
 }
 
