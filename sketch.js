@@ -86,6 +86,9 @@ function keyPressed(){
 function showCannonballs(ball,i){
   if(ball){
     ball.display();
+  if(ball.body.position.x>width||ball.body.position.y>height-50){
+  ball.remove(i);  
+  }
   }
 }
 
@@ -119,7 +122,7 @@ function collisionWithBoat(index){
       var collision = Matter.SAT.collides(balls[index].body, boats[i].body);
       if(collision.collided){
         //chamada das funções
-        //boats[i].remove(i);
+        boats[i].remove(i);
 
         balls[index].remove(index);
 

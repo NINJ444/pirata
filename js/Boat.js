@@ -18,5 +18,13 @@ class Boat
         imageMode(CENTER);
         image(this.image, 0,this.bposy, this.w, this.h);
         pop();
+        
     }
+    remove (i){
+        setTimeout(()=>{
+            World.remove(world,this.body);
+           delete boats[i];
+        },500);
+       }
 }
+     
