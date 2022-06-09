@@ -40,4 +40,12 @@ class CannonBall
             x:velocity.x * (180/3.14),
             y:velocity.y * (180/3.14)});
     }
+
+    remove(index){
+        Matter.Body.setVelocity(this.body, {x:0,y:0});
+        setTimeout(() => {
+            World.remove(world, this.body);
+            delete balls[index];
+        },500); //tempo em milissegundos
+    }
 }
