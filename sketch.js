@@ -8,12 +8,17 @@ var balls=[];
 var boats=[];
 var boatAnimation = [];
 var boatJSON, boatPNG; //spritedata e spritesheet
+var quebrado=[]
+var quebradojson
+var quebradopng
 
 function preload() {
   backgroundImg = loadImage("./assets/background.gif");
   towerImage = loadImage("./assets/tower.png");
   boatJSON = loadJSON("assets/boat/boat.json");
   boatPNG = loadImage("assets/boat/boat.png");
+  quebradojson = loadJSON("assets/boat/broken_boat.json");
+  quebradopng = loadImage("assets/boat/broken_boat.png");
   
 }
 
@@ -45,7 +50,12 @@ function setup() {
     var img = boatPNG.get(pos.x,pos.y,pos.w,pos.h);
     boatAnimation.push(img);
   }
-
+  var quebradoFrames = quebradojson.frames;
+  for(var i=0; i<quebradoFrames.length; i++){
+    var pos = quebradoFrames[i].position;
+    var img = quebradopng.get(pos.x,pos.y,pos.w,pos.h);
+    quebrado.push(img);
+  }
 
  
 

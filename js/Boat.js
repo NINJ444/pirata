@@ -28,10 +28,10 @@ class Boat
         
     }
     remove (i){
+     //trocar animacao
         setTimeout(()=>{
             World.remove(world,this.body);
            delete boats[i];
         },500);
        }
-}
-     
+}    
