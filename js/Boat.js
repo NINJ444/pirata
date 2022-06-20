@@ -9,6 +9,7 @@ class Boat
         this.w = w;
         this.h = h;
         this.speed = 0.05;
+        this.isBroken = false;
     }
 
     animacao(){
@@ -27,11 +28,16 @@ class Boat
         pop();
         
     }
-    remove (i){
+    remove(i){
      //trocar animacao
+     this.animation = quebrado;
+     this.speed = 0.05;
+     this.w = 300;
+     this.h = 300;
+     this.isBroken = true;
         setTimeout(()=>{
             World.remove(world,this.body);
            delete boats[i];
-        },500);
+        },1000);
        }
 }    
