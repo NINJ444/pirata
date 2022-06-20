@@ -11,6 +11,8 @@ var boatJSON, boatPNG; //spritedata e spritesheet
 var quebrado=[]
 var quebradojson;
 var quebradopng;
+var explosao,baternaagua,risadapirata,somdefundo;
+var rindo=false;
 
 function preload() {
   backgroundImg = loadImage("./assets/background.gif");
@@ -19,6 +21,10 @@ function preload() {
   boatPNG = loadImage("assets/boat/boat.png");
   quebradojson = loadJSON("assets/boat/broken_boat.json");
   quebradopng = loadImage("assets/boat/broken_boat.png");
+  explosao = loadSound("assets/cannon_explosion.mp3");
+  baternaagua = loadSound("assets/cannon_water.mp3");
+  risadapirata = loadSound("assets/pirate_laugh.mp3");
+  somdefundo = loadSound("assets/background_music.mp3");
   
 }
 
@@ -75,6 +81,12 @@ function setup() {
 
 function draw() {
   image(backgroundImg,0,0,1200,600)
+  
+  if(!somdefundo.isPlaying()){
+    somdefundo.play();
+    somdefundo.setVolume(0.2);
+  }
+
   Engine.update(engine);
 
   rect(ground.position.x, ground.position.y, width * 2, 1);
@@ -96,6 +108,7 @@ function draw() {
 function keyReleased(){
   if(keyCode == DOWN_ARROW){
     balls[balls.length-1].shoot();
+    explosao.play();
   }
 }
 
@@ -137,6 +150,10 @@ function showBoats(){
       var collision = Matter.SAT.collides(tower,boats[i].body);
       //o que vai acontecer se colidir
       if(collision.collided && !boats[i].isBroken){
+        if(!rindo && !risadapirata.isPlaying()){
+          risadapirata.play()
+          rindo=true;
+        }
         gameOver();
       }
      }
