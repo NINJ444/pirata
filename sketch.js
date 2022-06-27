@@ -15,6 +15,7 @@ var waterSplash = [];
 var waterSplashJSON, waterSplashPNG;
 var explosao,baternaagua,risadapirata,somdefundo;
 var rindo=false;
+var pontuacao=0;
 
 function preload() {
   backgroundImg = loadImage("./assets/background.gif");
@@ -111,6 +112,10 @@ function draw() {
 
   cannon.mostrar();
   showBoats();
+  fill ("black");
+  textSize(30);
+  text(`pontos ${pontuacao}`,1460,30);
+  textAlign(center);
 } //fim da função draw
 
 function keyReleased(){
@@ -133,7 +138,11 @@ function showCannonballs(ball,i){
   if(ball){
     ball.display();
   if(ball.body.position.x>width||ball.body.position.y>height-50){
-  ball.remove(i);  
+  
+  if(!ball.isSink){
+    ball.remove(i);
+    baternaagua.play();
+  }
   }
   }
 }
@@ -179,7 +188,7 @@ function collisionWithBoat(index){
       if(collision.collided){
         //chamada das funções
         boats[i].remove(i);
-
+        pontuacao+=1;
         //balls[index].remove(index);
         World.remove(world,balls[index].body);
         delete balls[index];
