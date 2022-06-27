@@ -37,7 +37,7 @@ class Boat
      this.isBroken = true;
         setTimeout(()=>{
             World.remove(world,this.body);
-           delete boats[i];
+            delete boats[i];
         },1000);
        }
 }    

@@ -11,6 +11,8 @@ var boatJSON, boatPNG; //spritedata e spritesheet
 var quebrado=[]
 var quebradojson;
 var quebradopng;
+var waterSplash = [];
+var waterSplashJSON, waterSplashPNG;
 var explosao,baternaagua,risadapirata,somdefundo;
 var rindo=false;
 
@@ -25,7 +27,8 @@ function preload() {
   baternaagua = loadSound("assets/cannon_water.mp3");
   risadapirata = loadSound("assets/pirate_laugh.mp3");
   somdefundo = loadSound("assets/background_music.mp3");
-  
+  waterSplashJSON = loadJSON("assets/waterSplash/waterSplash.json");
+  waterSplashPNG = loadImage("assets/waterSplash/waterSplash.png");
 }
 
 function setup() {
@@ -64,7 +67,12 @@ function setup() {
     quebrado.push(img);
   }
 
- 
+  var waterSplashFrames = waterSplashJSON.frames;
+  for(var i=0; i<waterSplashFrames.length; i++){
+    var pos = waterSplashFrames[i].position;
+    var img = waterSplashPNG.get(pos.x,pos.y,pos.w,pos.h);
+    waterSplash.push(img);
+  }
 
   //matrizes
   var m1 = [1,2,3,4,5];
@@ -77,7 +85,7 @@ function setup() {
   
   console.log(m2[0][0]);
 
-}
+} //fim da função setup
 
 function draw() {
   image(backgroundImg,0,0,1200,600)
@@ -103,7 +111,7 @@ function draw() {
 
   cannon.mostrar();
   showBoats();
-}
+} //fim da função draw
 
 function keyReleased(){
   if(keyCode == DOWN_ARROW){

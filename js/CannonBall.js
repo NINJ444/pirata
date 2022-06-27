@@ -9,13 +9,24 @@ class CannonBall
         World.add(world,this.body);
         this.image = loadImage("assets/cannonball.png");
         this.trajectory = [];
+        this.animation = [this.image];
+        this.isSink = false; //indica se a bola afundou
+        this.speed = 0.05;
+    }
+
+    animacao(){
+        this.speed += 0.05;
     }
 
     display(){
+        var angle = this.body.angle;
         var pos = this.body.position;
+        var index = floor(this.speed % this.animation.length);
         push();
+        translate(pos.x,pos.y);
+        rotate(angle);
         imageMode(CENTER);
-        image(this.image,pos.x,pos.y,this.r, this.r);
+        image(this.animation[index],0,0,this.r, this.r);
         pop();
 
         if(this.body.velocity.x > 0 && pos.x > 200){
@@ -42,7 +53,11 @@ class CannonBall
     }
 
     remove(index){
+        this.isSink = true;
         Matter.Body.setVelocity(this.body, {x:0,y:0});
+        this.animation = waterSplash;
+        this.speed = 0.05;
+        this.r = 100;
         setTimeout(() => {
             World.remove(world, this.body);
             delete balls[index];
